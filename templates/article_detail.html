@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+
+<div class="container py-5" style="max-width: 800px;">
+    <a href="{% url 'article_list' %}" class="btn btn-outline-light btn-sm mb-4">
+        ← Назад к блогу
+    </a>
+
+    {% if article.image %}
+    <img src="{{ article.image.url }}" class="w-100 mb-4"
+         style="height: 400px; object-fit: cover; border-radius: 16px;">
+    {% endif %}
+
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 1rem;">
+        {{ article.title }}
+    </h1>
+
+    <div class="d-flex gap-4 mb-4 flex-wrap" style="color: #555; font-size: 0.85rem;">
+        <span>📅 {{ article.created_at|date:"d.m.Y H:i" }}</span>
+        <span>✍️ {{ article.author.username }}</span>
+        <span>👁️ {{ article.views }} просмотров</span>
+        <span>💬 {{ comments.count }} комментариев</span>
+    </div>
+
+    <div class="card p-4 mb-5">
+        <p style="color: #ccc; line-height: 1.9; margin: 0; font-size: 1rem;">
+            {{ article.content }}
+        </p>
+    </div>
+
+    <!-- Комментарии -->
+    <h4 style="color: #fff; font-weight: 700; margin-bottom: 1.5rem;">
+        Комментарии
+        <span style="color: #555; font-size: 0.9rem; font-weight: 400;">
+            ({{ comments.count }})
+        </span>
+    </h4>
+
+    {% if comments %}
+        {% for comment in comments %}
+        <div class="card p-3 mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span style="color: #a78bfa; font-weight: 600; font-size: 0.9rem;">
+                    {{ comment.user.username }}
+                </span>
+                <span style="color: #555; font-size: 0.8rem;">
+                    {{ comment.created_at|date:"d.m.Y H:i" }}
+                </span>
+            </div>
+            <p style="color: #ccc; margin: 0; line-height: 1.6;">{{ comment.text }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="color: #555; margin-bottom: 1.5rem;">
+            Комментариев пока нет. Будьте первым!
+        </p>
+    {% endif %}
+
+    <!-- Форма комментария -->
+    <div class="card p-4 mt-3">
+        {% if user.is_authenticated %}
+        <h5 style="color: #fff; font-weight: 700; margin-bottom: 1rem;">
+            Оставить комментарий
+        </h5>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <textarea name="text" class="form-control" rows="3"
+                          placeholder="Напишите комментарий..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Отправить
+            </button>
+        </form>
+        {% else %}
+        <p style="color: #666; margin: 0;">
+            Чтобы оставить комментарий —
+            <a href="{% url 'login' %}" style="color: #a78bfa;">войдите</a>
+            или
+            <a href="{% url 'signup' %}" style="color: #06b6d4;">зарегистрируйтесь</a>
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

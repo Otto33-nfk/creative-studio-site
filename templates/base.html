@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Creative Studio{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #111111;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(17, 17, 17, 0.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 1.1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .navbar-brand {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff !important;
+            letter-spacing: -0.5px;
+        }
+        .navbar-brand span {
+            background: linear-gradient(135deg, #7c3aed, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-link {
+            color: #888 !important;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.45rem 0.9rem !important;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .nav-link:hover {
+            color: #fff !important;
+            background: rgba(255,255,255,0.05);
+        }
+        .nav-btn {
+            background: linear-gradient(135deg, #7c3aed, #06b6d4) !important;
+            color: #fff !important;
+            border-radius: 50px !important;
+            padding: 0.4rem 1.2rem !important;
+            font-weight: 600 !important;
+            font-size: 0.88rem !important;
+        }
+        .nav-btn:hover { opacity: 0.85 !important; }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed, #06b6d4);
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(124,58,237,0.35);
+            background: linear-gradient(135deg, #6d28d9, #0891b2);
+            color: #fff;
+            border: none;
+        }
+        .btn-outline-light {
+            border-radius: 50px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s;
+            color: #fff;
+        }
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.07);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+        .btn-outline-danger {
+            border-radius: 50px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .card {
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .card:hover {
+            border-color: rgba(124,58,237,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .form-control, .form-select {
+            background: #222 !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            color: #e2e8f0 !important;
+            border-radius: 10px !important;
+            padding: 0.65rem 1rem !important;
+        }
+        .form-control:focus, .form-select:focus {
+            background: #2a2a2a !important;
+            border-color: #7c3aed !important;
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.15) !important;
+            color: #e2e8f0 !important;
+        }
+        .form-control::placeholder { color: #555 !important; }
+        .form-label { color: #888; font-size: 0.88rem; font-weight: 500; margin-bottom: 0.4rem; }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(124,58,237,0.1);
+            border: 1px solid rgba(124,58,237,0.2);
+            color: #a78bfa;
+            border-radius: 50px;
+            padding: 0.25rem 0.9rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        footer {
+            background: #0d0d0d;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#7c3aed, #06b6d4);
+            border-radius: 10px;
+        }
+
+        .alert-success {
+            background: rgba(16,185,129,0.1);
+            border: 1px solid rgba(16,185,129,0.2);
+            color: #6ee7b7;
+            border-radius: 10px;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fadeUp 0.6s ease forwards; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">Creative <span>Studio</span></a>
+        <button class="navbar-toggler border-0" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-center gap-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">О нас</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'portfolio' %}">Портфолио</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'article_list' %}">Блог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contacts' %}">Контакты</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item ms-2">
+                    <a class="nav-link" href="{% url 'profile' %}"
+                       style="color: #a78bfa !important; font-weight: 600;">
+                        {{ user.username }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}"
+                       style="color: #f87171 !important;">Выйти</a>
+                </li>
+                {% else %}
+                <li class="nav-item ms-2">
+                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                </li>
+                <li class="nav-item ms-1">
+                    <a class="nav-link nav-btn" href="{% url 'signup' %}">Регистрация</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main>
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="py-5 mt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div style="font-size: 1.1rem; font-weight: 800; color: #fff;">
+                    Creative <span class="gradient-text">Studio</span>
+                </div>
+                <p class="mt-2 mb-0" style="color: #555; font-size: 0.85rem;">
+                    Дизайн. Разработка. Вдохновение.
+                </p>
+            </div>
+            <div class="col-md-4 text-center mb-3 mb-md-0">
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{% url 'about' %}" class="text-decoration-none" style="color: #555; font-size: 0.85rem;">О нас</a>
+                    <a href="{% url 'portfolio' %}" class="text-decoration-none" style="color: #555; font-size: 0.85rem;">Портфолио</a>
+                    <a href="{% url 'article_list' %}" class="text-decoration-none" style="color: #555; font-size: 0.85rem;">Блог</a>
+                    <a href="{% url 'contacts' %}" class="text-decoration-none" style="color: #555; font-size: 0.85rem;">Контакты</a>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <p class="mb-1" style="color: #555; font-size: 0.85rem;">📍 г. Саратов</p>
+                <p class="mb-0" style="color: #555; font-size: 0.85rem;">© 2026 Creative Studio</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

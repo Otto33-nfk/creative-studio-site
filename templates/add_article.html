@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Написать статью{% endblock %}
+{% block content %}
+
+<div class="container py-5" style="max-width: 700px;">
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">
+        Написать <span class="gradient-text">статью</span>
+    </h1>
+    <p style="color: #666; margin-bottom: 2rem;">Поделитесь знаниями и опытом</p>
+
+    <div class="card p-4">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-4">
+                <label class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div style="color: #f87171; font-size: 0.85rem; margin-top: 0.4rem;">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-primary">
+                    Опубликовать статью
+                </button>
+                <a href="{% url 'article_list' %}" class="btn btn-outline-light">
+                    Отмена
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

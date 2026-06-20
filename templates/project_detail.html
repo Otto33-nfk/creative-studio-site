@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}{{ project.title }}{% endblock %}
+{% block content %}
+
+<div class="container py-5" style="max-width: 900px;">
+    <a href="{% url 'portfolio' %}" class="btn btn-outline-light btn-sm mb-4">
+        ← Назад к портфолио
+    </a>
+
+    {% if project.image %}
+    <img src="{{ project.image.url }}" class="w-100 mb-4"
+         style="height: 450px; object-fit: cover; border-radius: 16px;">
+    {% endif %}
+
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem;">
+        {{ project.title }}
+    </h1>
+
+    <div class="d-flex gap-4 mb-4 flex-wrap">
+        <span style="color: #666; font-size: 0.85rem;">
+            ✍️ {{ project.author.username }}
+        </span>
+        <span style="color: #666; font-size: 0.85rem;">
+            📅 {{ project.created_at|date:"d.m.Y" }}
+        </span>
+        <span style="color: #666; font-size: 0.85rem;">
+            👁️ {{ project.views }} просмотров
+        </span>
+    </div>
+
+    <div class="card p-4">
+        <p style="color: #ccc; line-height: 1.9; margin: 0; font-size: 1rem;">
+            {{ project.full_description|default:"Описание не указано." }}
+        </p>
+    </div>
+</div>
+
+{% endblock %}

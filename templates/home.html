@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block title %}Creative Studio — Главная{% endblock %}
+{% block content %}
+
+<!-- HERO -->
+<section style="min-height: 88vh; display: flex; align-items: center; background: #111111;">
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col-lg-8 fade-up">
+                <div class="section-tag">Творческая студия — Саратов</div>
+                <h1 style="font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900;
+                           line-height: 1.05; letter-spacing: -2px; margin-bottom: 1.5rem; color: #fff;">
+                    Создаём сайты<br>
+                    <span class="gradient-text">которые работают</span>
+                </h1>
+                <p style="font-size: 1.1rem; color: #666; max-width: 520px;
+                          line-height: 1.8; margin-bottom: 2.5rem;">
+                    Веб-дизайн, брендинг и разработка для бизнеса.
+                    Превращаем идеи в красивые цифровые продукты.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="{% url 'portfolio' %}" class="btn btn-primary btn-lg">
+                        Смотреть работы
+                    </a>
+                    <a href="{% url 'contacts' %}" class="btn btn-outline-light btn-lg">
+                        Написать нам
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="row g-3 pb-5">
+            <div class="col-6 col-md-3">
+                <div class="card p-4 text-center">
+                    <div style="font-size: 2rem; font-weight: 900;" class="gradient-text">15+</div>
+                    <div style="color: #555; font-size: 0.85rem; margin-top: 0.3rem;">Проектов</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card p-4 text-center">
+                    <div style="font-size: 2rem; font-weight: 900;" class="gradient-text">10+</div>
+                    <div style="color: #555; font-size: 0.85rem; margin-top: 0.3rem;">Клиентов</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card p-4 text-center">
+                    <div style="font-size: 2rem; font-weight: 900;" class="gradient-text">3</div>
+                    <div style="color: #555; font-size: 0.85rem; margin-top: 0.3rem;">Года опыта</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card p-4 text-center">
+                    <div style="font-size: 2rem; font-weight: 900;" class="gradient-text">100%</div>
+                    <div style="color: #555; font-size: 0.85rem; margin-top: 0.3rem;">Довольных клиентов</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section style="padding: 6rem 0; background: #161616;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-tag">Что мы делаем</div>
+            <h2 style="font-size: 2.2rem; font-weight: 800; color: #fff;">
+                Наши <span class="gradient-text">услуги</span>
+            </h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card p-4 h-100">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🎨</div>
+                    <h5 style="font-weight: 700; color: #fff; margin-bottom: 0.7rem;">Веб-дизайн</h5>
+                    <p style="color: #666; line-height: 1.7; margin: 0;">
+                        Создаём красивые и удобные интерфейсы.
+                        Думаем о пользователе на каждом шаге.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 h-100">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">💎</div>
+                    <h5 style="font-weight: 700; color: #fff; margin-bottom: 0.7rem;">Брендинг</h5>
+                    <p style="color: #666; line-height: 1.7; margin: 0;">
+                        Логотипы, фирменный стиль и айдентика.
+                        Создаём образ который запоминается.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 h-100">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">💻</div>
+                    <h5 style="font-weight: 700; color: #fff; margin-bottom: 0.7rem;">Разработка</h5>
+                    <p style="color: #666; line-height: 1.7; margin: 0;">
+                        Сайты и веб-приложения под ключ.
+                        Быстро, надёжно, современно.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section style="padding: 6rem 0; background: #111111;">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-5 flex-wrap gap-3">
+            <div>
+                <div class="section-tag">Наши работы</div>
+                <h2 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin: 0;">
+                    Последние <span class="gradient-text">проекты</span>
+                </h2>
+            </div>
+            <a href="{% url 'portfolio' %}" class="btn btn-outline-light">
+                Все проекты →
+            </a>
+        </div>
+
+        {% if projects %}
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-md-4">
+                <div class="card h-100">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" class="w-100"
+                         style="height: 220px; object-fit: cover;">
+                    {% else %}
+                    <div style="height: 220px; background: #222;
+                                display: flex; align-items: center;
+                                justify-content: center; font-size: 3rem;">🖼️</div>
+                    {% endif %}
+                    <div class="card-body p-4">
+                        <h5 style="font-weight: 700; color: #fff; margin-bottom: 0.5rem;">
+                            {{ project.title }}
+                        </h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                            {{ project.short_description|truncatechars:100 }}
+                        </p>
+                        <a href="{% url 'project_detail' project.pk %}"
+                           class="btn btn-primary btn-sm">Открыть →</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📂</div>
+            <p style="color: #555;">Проекты появятся здесь после добавления через админку.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- CTA -->
+<section style="padding: 6rem 0; background: #161616;">
+    <div class="container text-center">
+        <div style="max-width: 550px; margin: 0 auto;">
+            <div class="section-tag">Начнём?</div>
+            <h2 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 1rem;">
+                Есть идея <span class="gradient-text">проекта?</span>
+            </h2>
+            <p style="color: #666; font-size: 1rem; line-height: 1.7; margin-bottom: 2rem;">
+                Расскажите нам о своей задаче — мы найдём лучшее решение и воплотим его в жизнь.
+            </p>
+            <a href="{% url 'contacts' %}" class="btn btn-primary btn-lg px-5">
+                Связаться с нами
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

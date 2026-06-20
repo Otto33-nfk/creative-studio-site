@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 500px;">
+    <h1 class="gradient-text mb-4">Регистрация</h1>
+    <div class="card p-4">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3">
+                <label class="form-label">{{ field.label }}</label>
+                <input type="{{ field.field.widget.input_type }}"
+                       name="{{ field.html_name }}"
+                       class="form-control"
+                       style="background: #334155; color: #e2e8f0; border-color: #475569;">
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="text-danger small mt-1">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+                {% if field.help_text %}
+                    <div class="text-muted small mt-1">{{ field.help_text }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary w-100 mt-2">Зарегистрироваться</button>
+        </form>
+        <p class="text-center text-muted mt-3 mb-0">
+            Уже есть аккаунт? <a href="{% url 'login' %}" style="color: #7c3aed;">Войти</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

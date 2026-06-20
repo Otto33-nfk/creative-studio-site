@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% block title %}Профиль — {{ user.username }}{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="row g-4">
+
+        <!-- Левая колонка -->
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                {% if profile.avatar %}
+                <img src="{{ profile.avatar.url }}" class="rounded-circle mb-3 mx-auto d-block"
+                     style="width: 110px; height: 110px; object-fit: cover;
+                            border: 3px solid #333;">
+                {% else %}
+                <div class="rounded-circle mb-3 mx-auto d-flex align-items-center justify-content-center"
+                     style="width: 110px; height: 110px; background: #222;
+                            font-size: 2.5rem; border: 3px solid #333;">
+                    👤
+                </div>
+                {% endif %}
+
+                <h4 style="color: #fff; font-weight: 700; margin-bottom: 0.3rem;">
+                    {{ user.username }}
+                </h4>
+                {% if profile.city %}
+                <p style="color: #666; font-size: 0.85rem; margin-bottom: 0.3rem;">
+                    📍 {{ profile.city }}
+                </p>
+                {% endif %}
+                {% if profile.about %}
+                <p style="color: #777; font-size: 0.85rem; margin-bottom: 1.2rem;">
+                    {{ profile.about }}
+                </p>
+                {% endif %}
+
+                <a href="{% url 'edit_profile' %}"
+                   class="btn btn-primary w-100 mb-2">
+                    Редактировать профиль
+                </a>
+                <a href="{% url 'logout' %}"
+                   class="btn btn-outline-danger w-100">
+                    Выйти
+                </a>
+            </div>
+        </div>
+
+        <!-- Правая колонка -->
+        <div class="col-md-8">
+
+            <!-- Информация -->
+            <div class="card p-4 mb-4">
+                <h5 style="color: #fff; font-weight: 700; margin-bottom: 1.2rem;">
+                    Информация
+                </h5>
+                <div style="display: grid; gap: 0.8rem;">
+                    <div>
+                        <div style="color: #555; font-size: 0.75rem; margin-bottom: 0.2rem;">
+                            ИМЯ ПОЛЬЗОВАТЕЛЯ
+                        </div>
+                        <div style="color: #ddd; font-size: 0.95rem;">
+                            {{ user.username }}
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #222; padding-top: 0.8rem;">
+                        <div style="color: #555; font-size: 0.75rem; margin-bottom: 0.2rem;">
+                            EMAIL
+                        </div>
+                        <div style="color: #ddd; font-size: 0.95rem;">
+                            {{ user.email|default:"не указан" }}
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #222; padding-top: 0.8rem;">
+                        <div style="color: #555; font-size: 0.75rem; margin-bottom: 0.2rem;">
+                            ГОРОД
+                        </div>
+                        <div style="color: #ddd; font-size: 0.95rem;">
+                            {{ profile.city|default:"не указан" }}
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #222; padding-top: 0.8rem;">
+                        <div style="color: #555; font-size: 0.75rem; margin-bottom: 0.2rem;">
+                            О СЕБЕ
+                        </div>
+                        <div style="color: #ddd; font-size: 0.95rem;">
+                            {{ profile.about|default:"не указано" }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Мои проекты -->
+            <div class="card p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 style="color: #fff; font-weight: 700; margin: 0;">
+                        Мои проекты
+                    </h5>
+                    <a href="{% url 'add_project' %}" class="btn btn-primary btn-sm">
+                        + Добавить
+                    </a>
+                </div>
+
+                {% if user_projects %}
+                <div class="row g-3">
+                    {% for project in user_projects %}
+                    <div class="col-sm-6">
+                        <div class="card" style="background: #111;">
+                            {% if project.image %}
+                            <img src="{{ project.image.url }}" class="w-100"
+                                 style="height: 130px; object-fit: cover;
+                                        border-radius: 12px 12px 0 0;">
+                            {% else %}
+                            <div style="height: 130px; background: #1a1a1a;
+                                        display: flex; align-items: center;
+                                        justify-content: center; font-size: 2rem;
+                                        border-radius: 12px 12px 0 0;">🖼️</div>
+                            {% endif %}
+                            <div class="p-3">
+                                <p style="color: #ddd; font-weight: 600; font-size: 0.9rem;
+                                          margin-bottom: 0.3rem;">
+                                    {{ project.title }}
+                                </p>
+                                <p style="color: #555; font-size: 0.78rem; margin-bottom: 0.8rem;">
+                                    👁️ {{ project.views }}
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <a href="{% url 'project_detail' project.pk %}"
+                                       class="btn btn-primary btn-sm">
+                                        Открыть
+                                    </a>
+                                    <a href="{% url 'edit_project' project.pk %}"
+                                       class="btn btn-sm"
+                                       style="background: #1a1a1a; color: #aaa;
+                                              border: 1px solid #333;">
+                                        ✏️
+                                    </a>
+                                    <a href="{% url 'delete_project' project.pk %}"
+                                       class="btn btn-sm"
+                                       style="background: #1a1a1a; color: #f87171;
+                                              border: 1px solid #333;">
+                                        🗑️
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p style="color: #555; margin: 0;">Проектов пока нет.</p>
+                {% endif %}
+            </div>
+
+            <!-- Мои статьи -->
+            <div class="card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 style="color: #fff; font-weight: 700; margin: 0;">
+                        Мои статьи
+                    </h5>
+                    <a href="{% url 'add_article' %}" class="btn btn-primary btn-sm">
+                        + Написать
+                    </a>
+                </div>
+
+                {% if user_articles %}
+                    {% for article in user_articles %}
+                    <div style="padding: 0.8rem 0;
+                                border-bottom: 1px solid #1a1a1a;">
+                        <div class="d-flex justify-content-between align-items-start gap-3">
+                            <div style="flex: 1;">
+                                <a href="{% url 'article_detail' article.pk %}"
+                                   style="color: #ddd; text-decoration: none;
+                                          font-weight: 600; font-size: 0.9rem;">
+                                    {{ article.title }}
+                                </a>
+                                <p style="color: #555; font-size: 0.78rem; margin: 0.3rem 0 0;">
+                                    📅 {{ article.created_at|date:"d.m.Y" }} &nbsp;
+                                    👁️ {{ article.views }} &nbsp;
+                                    💬 {{ article.comments.count }}
+                                </p>
+                            </div>
+                            <div class="d-flex gap-2 flex-shrink-0">
+                                <a href="{% url 'edit_article' article.pk %}"
+                                   class="btn btn-sm"
+                                   style="background: #1a1a1a; color: #aaa;
+                                          border: 1px solid #333;">
+                                    ✏️
+                                </a>
+                                <a href="{% url 'delete_article' article.pk %}"
+                                   class="btn btn-sm"
+                                   style="background: #1a1a1a; color: #f87171;
+                                          border: 1px solid #333;">
+                                    🗑️
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <p style="color: #555; margin: 0;">Статей пока нет.</p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

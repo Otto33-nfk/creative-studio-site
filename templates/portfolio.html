@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Портфолио{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
+        <div>
+            <h1 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin: 0;">
+                Портфолио
+            </h1>
+            <p style="color: #666; margin: 0.3rem 0 0;">Работы нашей студии</p>
+        </div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'add_project' %}" class="btn btn-primary">
+            + Добавить проект
+        </a>
+        {% endif %}
+    </div>
+
+    {% if projects %}
+    <div class="row g-4">
+        {% for project in projects %}
+        <div class="col-md-4">
+            <div class="card h-100">
+                {% if project.image %}
+                <img src="{{ project.image.url }}" class="w-100"
+                     style="height: 220px; object-fit: cover;">
+                {% else %}
+                <div style="height: 220px; background: #1a1a1a;
+                            display: flex; align-items: center;
+                            justify-content: center; font-size: 3rem;">🖼️</div>
+                {% endif %}
+                <div class="card-body p-4">
+                    <h5 style="font-weight: 700; color: #fff; margin-bottom: 0.4rem;">
+                        {{ project.title }}
+                    </h5>
+                    <div style="color: #555; font-size: 0.82rem; margin-bottom: 0.8rem;">
+                        ✍️ {{ project.author.username }} &nbsp;
+                        👁️ {{ project.views }} &nbsp;
+                        📅 {{ project.created_at|date:"d.m.Y" }}
+                    </div>
+                    <p style="color: #888; font-size: 0.9rem;
+                              line-height: 1.6; margin-bottom: 1rem;">
+                        {{ project.short_description|truncatechars:100 }}
+                    </p>
+                    <a href="{% url 'project_detail' project.pk %}"
+                       class="btn btn-primary btn-sm">Открыть →</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">📂</div>
+        <p style="color: #555; font-size: 1rem;">Проектов пока нет.</p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'add_project' %}" class="btn btn-primary mt-2">
+            Добавить первый проект
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
