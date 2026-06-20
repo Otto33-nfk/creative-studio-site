@@ -3,10 +3,29 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True, verbose_name='Аватар')
-    city = models.CharField(max_length=100, blank=True, verbose_name='Город')
-    about = models.TextField(blank=True, verbose_name='О себе')
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Пользователь'
+    )
+
+    avatar = models.ImageField(
+        upload_to='avatars/',
+        blank=True,
+        null=True,
+        verbose_name='Аватар'
+    )
+
+    city = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name='Город'
+    )
+
+    about = models.TextField(
+        blank=True,
+        verbose_name='О себе'
+    )
 
     class Meta:
         verbose_name = 'Профиль'
@@ -14,3 +33,37 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'Профиль {self.user.username}'
+
+
+class Follow(models.Model):
+    follower = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='following',
+        verbose_name='Кто подписался'
+    )
+
+    following = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='followers',
+        verbose_name='На кого подписались'
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата подписки'
+    )
+
+    class Meta:
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['follower', 'following'],
+                name='unique_follow'
+            )
+        ]
+
+    def __str__(self):
+        return f'{self.follower.username} → {self.following.username}'

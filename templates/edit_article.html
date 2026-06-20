@@ -1,32 +1,54 @@
 {% extends 'base.html' %}
 {% block title %}Редактировать статью{% endblock %}
+
 {% block content %}
 
-<div class="container py-5" style="max-width: 700px;">
-    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">
-        Редактировать <span class="gradient-text">статью</span>
-    </h1>
-    <p style="color: #666; margin-bottom: 2rem;">{{ article.title }}</p>
+<div class="container py-5" style="max-width: 720px;">
+    <div style="margin-bottom: 2rem;">
+        <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">
+            Редактировать статью
+        </h1>
+        <p style="color: #6b7280; margin: 0;">
+            После изменения статья снова отправится на модерацию.
+        </p>
+    </div>
 
-    <div class="card p-4">
+    <div class="card" style="padding: 2rem;">
+        {% if article.image %}
+            <div style="margin-bottom: 1.5rem;">
+                <div class="form-label">Текущее изображение</div>
+                <img src="{{ article.image.url }}"
+                     alt="{{ article.title }}"
+                     style="width: 100%; max-height: 280px; object-fit: cover;
+                            border-radius: 10px; border: 1px solid #242424;">
+            </div>
+        {% endif %}
+
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+
             {% for field in form %}
-            <div class="mb-4">
-                <label class="form-label">{{ field.label }}</label>
-                {{ field }}
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                    <div style="color: #f87171; font-size: 0.85rem; margin-top: 0.4rem;">
-                        {{ error }}
-                    </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
+                <div class="mb-4">
+                    <label class="form-label">{{ field.label }}</label>
+                    {{ field }}
+
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <div style="color: #f87171; font-size: 0.85rem; margin-top: 0.4rem;">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             {% endfor %}
+
             <div class="d-flex gap-3">
-                <button type="submit" class="btn btn-primary">Сохранить</button>
-                <a href="{% url 'profile' %}" class="btn btn-outline-light">Отмена</a>
+                <button type="submit" class="btn btn-primary">
+                    Сохранить
+                </button>
+                <a href="{% url 'profile' %}" class="btn btn-outline-light">
+                    Отмена
+                </a>
             </div>
         </form>
     </div>

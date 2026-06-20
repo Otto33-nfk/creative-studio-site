@@ -1,208 +1,115 @@
 {% extends 'base.html' %}
 {% block title %}Контакты{% endblock %}
+
 {% block content %}
 
 <div class="container py-5">
 
-    <!-- Заголовок -->
     <div class="text-center mb-5">
-        <h1 style="font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">
+        <h1 style="font-size: 2.4rem; font-weight: 800; color: #fff; margin-bottom: 0.6rem;">
             Свяжитесь с нами
         </h1>
-        <p style="color: #666; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-            Готовы обсудить ваш проект. Напишите нам — ответим в течение дня.
+        <p style="color: #6b7280; max-width: 520px; margin: 0 auto; line-height: 1.7;">
+            Расскажите о задаче, проекте или идее. Сообщение сохранится в системе,
+            и администратор сможет посмотреть его в панели управления.
         </p>
     </div>
 
     <div class="row g-5">
-
-        <!-- Левая колонка — информация -->
         <div class="col-md-5">
 
-            <!-- Карточка студии -->
-            <div class="card p-4 mb-4">
-                <h5 style="color: #fff; font-weight: 700; margin-bottom: 1.5rem;">
+            <div class="card" style="padding: 2rem; margin-bottom: 1.5rem;">
+                <h5 style="color: #fff; font-weight: 800; margin-bottom: 1.5rem;">
                     Creative Studio
                 </h5>
 
-                <div class="d-flex gap-3 align-items-start mb-4">
-                    <div style="width: 40px; height: 40px; background: #1a1a1a;
-                                border: 1px solid #333; border-radius: 10px;
-                                display: flex; align-items: center;
-                                justify-content: center; font-size: 1.1rem;
-                                flex-shrink: 0;">
+                <div class="d-flex gap-3 mb-4">
+                    <div style="width: 40px; height: 40px; border-radius: 8px;
+                                background: #1a1a1a; border: 1px solid #2a2a2a;
+                                display: flex; align-items: center; justify-content: center;">
                         📍
                     </div>
                     <div>
-                        <div style="color: #555; font-size: 0.75rem; margin-bottom: 0.2rem;">
-                            АДРЕС
-                        </div>
-                        <div style="color: #ddd; font-size: 0.95rem;">
-                            г. Саратов, Россия
-                        </div>
+                        <div class="form-label" style="margin-bottom: 0.2rem;">Город</div>
+                        <div style="color: #e5e7eb;">Саратов, Россия</div>
                     </div>
                 </div>
 
-                <div class="d-flex gap-3 align-items-start mb-4">
-                    <div style="width: 40px; height: 40px; background: #1a1a1a;
-                                border: 1px solid #333; border-radius: 10px;
-                                display: flex; align-items: center;
-                                justify-content: center; font-size: 1.1rem;
-                                flex-shrink: 0;">
+                <div class="d-flex gap-3 mb-4">
+                    <div style="width: 40px; height: 40px; border-radius: 8px;
+                                background: #1a1a1a; border: 1px solid #2a2a2a;
+                                display: flex; align-items: center; justify-content: center;">
                         📧
                     </div>
                     <div>
-                        <div style="color: #555; font-size: 0.75rem; margin-bottom: 0.2rem;">
-                            EMAIL
-                        </div>
-                        <div style="color: #ddd; font-size: 0.95rem;">
-                            studio@example.com
-                        </div>
+                        <div class="form-label" style="margin-bottom: 0.2rem;">Email</div>
+                        <div style="color: #e5e7eb;">studio@example.com</div>
                     </div>
                 </div>
 
-                <div class="d-flex gap-3 align-items-start mb-4">
-                    <div style="width: 40px; height: 40px; background: #1a1a1a;
-                                border: 1px solid #333; border-radius: 10px;
-                                display: flex; align-items: center;
-                                justify-content: center; font-size: 1.1rem;
-                                flex-shrink: 0;">
-                        📞
+                <div class="d-flex gap-3">
+                    <div style="width: 40px; height: 40px; border-radius: 8px;
+                                background: #1a1a1a; border: 1px solid #2a2a2a;
+                                display: flex; align-items: center; justify-content: center;">
+                        💬
                     </div>
                     <div>
-                        <div style="color: #555; font-size: 0.75rem; margin-bottom: 0.2rem;">
-                            ТЕЛЕФОН
-                        </div>
-                        <div style="color: #ddd; font-size: 0.95rem;">
-                            +7 (900) 123-45-67
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-flex gap-3 align-items-start">
-                    <div style="width: 40px; height: 40px; background: #1a1a1a;
-                                border: 1px solid #333; border-radius: 10px;
-                                display: flex; align-items: center;
-                                justify-content: center; font-size: 1.1rem;
-                                flex-shrink: 0;">
-                        🕐
-                    </div>
-                    <div>
-                        <div style="color: #555; font-size: 0.75rem; margin-bottom: 0.2rem;">
-                            РЕЖИМ РАБОТЫ
-                        </div>
-                        <div style="color: #ddd; font-size: 0.95rem;">
-                            Пн–Пт: 9:00 — 18:00
-                        </div>
-                        <div style="color: #555; font-size: 0.85rem;">
-                            Сб–Вс: выходной
-                        </div>
+                        <div class="form-label" style="margin-bottom: 0.2rem;">Ответ</div>
+                        <div style="color: #e5e7eb;">Обычно отвечаем в течение дня</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Что мы делаем -->
-            <div class="card p-4">
-                <h6 style="color: #fff; font-weight: 700; margin-bottom: 1rem;">
+            <div class="card" style="padding: 2rem;">
+                <h6 style="color: #fff; font-weight: 800; margin-bottom: 1rem;">
                     Чем можем помочь
                 </h6>
-                <div style="display: grid; gap: 0.6rem;">
-                    <div style="display: flex; align-items: center; gap: 0.7rem;">
-                        <div style="width: 6px; height: 6px; border-radius: 50%;
-                                    background: #7c3aed; flex-shrink: 0;"></div>
-                        <span style="color: #aaa; font-size: 0.9rem;">Разработка сайтов</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.7rem;">
-                        <div style="width: 6px; height: 6px; border-radius: 50%;
-                                    background: #7c3aed; flex-shrink: 0;"></div>
-                        <span style="color: #aaa; font-size: 0.9rem;">Веб-дизайн и UI/UX</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.7rem;">
-                        <div style="width: 6px; height: 6px; border-radius: 50%;
-                                    background: #7c3aed; flex-shrink: 0;"></div>
-                        <span style="color: #aaa; font-size: 0.9rem;">Брендинг и логотипы</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.7rem;">
-                        <div style="width: 6px; height: 6px; border-radius: 50%;
-                                    background: #06b6d4; flex-shrink: 0;"></div>
-                        <span style="color: #aaa; font-size: 0.9rem;">Консультации</span>
-                    </div>
+
+                <div style="display: grid; gap: 0.7rem;">
+                    <div style="color: #9ca3af;">• Разработка сайта</div>
+                    <div style="color: #9ca3af;">• Дизайн интерфейса</div>
+                    <div style="color: #9ca3af;">• Брендинг и логотип</div>
+                    <div style="color: #9ca3af;">• Консультация по проекту</div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Правая колонка — форма -->
         <div class="col-md-7">
-            <div class="card p-5">
-                <h4 style="color: #fff; font-weight: 700; margin-bottom: 0.4rem;">
+            <div class="card" style="padding: 2.5rem;">
+                <h4 style="color: #fff; font-weight: 800; margin-bottom: 0.5rem;">
                     Написать нам
                 </h4>
-                <p style="color: #555; font-size: 0.9rem; margin-bottom: 2rem;">
-                    Заполните форму и мы свяжемся с вами
+                <p style="color: #6b7280; margin-bottom: 2rem;">
+                    Заполните форму ниже.
                 </p>
 
-                <form>
+                <form method="post">
                     {% csrf_token %}
 
-                    <div class="row g-3 mb-3">
-                        <div class="col-sm-6">
-                            <label style="color: #555; font-size: 0.78rem;
-                                          text-transform: uppercase; letter-spacing: 0.5px;">
-                                Ваше имя
-                            </label>
-                            <input type="text" class="form-control mt-1"
-                                   placeholder="Иван Иванов">
+                    {% for field in form %}
+                        <div class="mb-4">
+                            <label class="form-label">{{ field.label }}</label>
+                            {{ field }}
+
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <div style="color: #f87171; font-size: 0.85rem; margin-top: 0.4rem;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
-                        <div class="col-sm-6">
-                            <label style="color: #555; font-size: 0.78rem;
-                                          text-transform: uppercase; letter-spacing: 0.5px;">
-                                Email
-                            </label>
-                            <input type="email" class="form-control mt-1"
-                                   placeholder="ivan@example.com">
-                        </div>
-                    </div>
+                    {% endfor %}
 
-                    <div class="mb-3">
-                        <label style="color: #555; font-size: 0.78rem;
-                                      text-transform: uppercase; letter-spacing: 0.5px;">
-                            Тема
-                        </label>
-                        <select class="form-control mt-1">
-                            <option value="" style="background: #222;">
-                                Выберите тему обращения
-                            </option>
-                            <option style="background: #222;">Разработка сайта</option>
-                            <option style="background: #222;">Дизайн и брендинг</option>
-                            <option style="background: #222;">Консультация</option>
-                            <option style="background: #222;">Другое</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-4">
-                        <label style="color: #555; font-size: 0.78rem;
-                                      text-transform: uppercase; letter-spacing: 0.5px;">
-                            Сообщение
-                        </label>
-                        <textarea class="form-control mt-1" rows="5"
-                                  placeholder="Расскажите о вашем проекте..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100"
-                            style="padding: 0.8rem;">
-                        Отправить сообщение →
+                    <button type="submit" class="btn btn-primary w-100">
+                        Отправить сообщение
                     </button>
-
-                    <p style="color: #444; font-size: 0.8rem;
-                               text-align: center; margin-top: 1rem; margin-bottom: 0;">
-                        Отвечаем в течение 24 часов в рабочие дни
-                    </p>
                 </form>
             </div>
         </div>
-
     </div>
+
 </div>
 
 {% endblock %}
